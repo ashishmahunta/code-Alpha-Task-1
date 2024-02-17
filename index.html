@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #1b1b18;
+    }
+    form {
+        background: linear-gradient(red ,pink ,yellow,green);
+        font-size: 10vh;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #0ae3df;
+        color: rgba(35, 34, 34, 0.923);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    button[type="submit"]:hover {
+        background-color: #e9062f;
+    }
+    input[type="date"] {
+        padding: 6px;
+        width: 40%;
+        margin-bottom: 7px;
+        height: 30px; 
+        width: 40%; 
+    }
+</style>
+</head>
+<body>
+    <form id="ageCalculatorForm">
+        <h2>Age Calculator</h2>
+        <div>
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" required>
+        </div>
+        <div>
+            <button type="submit">Calculate Age</button>
+        </div>
+        <div id="result"></div>
+    </form>
+
+    <script>
+        document.getElementById('ageCalculatorForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            calculateAge();
+        });
+
+        function calculateAge() {
+            var dob = new Date(document.getElementById('dob').value);
+            var today = new Date();
+            var age = today.getFullYear() - dob.getFullYear();
+            var monthDiff = today.getMonth() - dob.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            
+            document.getElementById('result').innerText = "Your age is: " + age;
+        }
+    </script>
+</body>
+</html>
